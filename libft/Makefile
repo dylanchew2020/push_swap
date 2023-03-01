@@ -18,16 +18,12 @@ SRC = $(addprefix ft_, $(addsuffix .c, \
 		isalpha isdigit isalnum isascii isprint toupper tolower \
 		memset memcpy memmove memchr memcmp atoi bzero calloc\
 		strlen strlcpy strlcat strncmp strchr strrchr strnstr strdup \
-		substr strjoin strtrim split itoa itoa_base strmapi striteri \
-		putchar_fd putstr_fd putendl_fd putnbr_fd )) get_next_line.c
+		substr strjoin strtrim split itoa itoa_u itoa_base strmapi striteri \
+		putchar_fd putstr_fd putendl_fd putnbr_fd printf \
+		lstnew lstadd_front lstsize lstlast lstadd_back lstdelone \
+		lstclear lstiter lstmap)) get_next_line.c
 OBJ_DIR = ./obj/
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
-
-# BONUS
-B_SRC = $(addprefix $(SRC_DIR)ft_, $(addsuffix .c, \
-		lstnew lstadd_front lstsize lstlast lstadd_back lstdelone \
-		lstclear lstiter lstmap))
-B_OBJ = $(B_SRC:%.c=$(OBJ_DIR)%.o)
 
 # HEADER
 INC = ./includes
@@ -69,9 +65,6 @@ $(OBJ_DIR):
 	@ mkdir -p $(OBJ_DIR)
 	@ printf "$(_SUCCESS) Libft object directory created.\n"
 	@ printf "$(_INFO) Generating Libft object files...\n"
-
-bonus: $(B_OBJ) $(OBJ)
-	$(LIBCR) $(NAME) $(B_OBJ) $(OBJ)
 	
 clean:
 	@ $(RM) $(OBJ) ${B_OBJ}

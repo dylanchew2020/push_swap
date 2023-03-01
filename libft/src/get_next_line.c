@@ -6,11 +6,16 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:14:14 by lchew             #+#    #+#             */
-/*   Updated: 2023/02/08 16:43:13 by lchew            ###   ########.fr       */
+/*   Updated: 2023/02/28 14:04:56 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void			ft_free(char **str);
+static char		*gnl_find_nl(char *buffer, int nbyte, char *txtread, int fd);
+static char		*gnl_join(char *s1, char *s2);
+static char		*gnl_write(char *buffer, char **res);
 
 char	*get_next_line(int fd)
 {

@@ -15,7 +15,7 @@ NAME	=	push_swap
 
 # SOURCE CODE
 SRC_DIR = ./
-SRC	=	
+SRC	= push_swap.c
 OBJ_DIR = ./obj/
 OBJ	=	$(SRC:%.c=$(OBJ_DIR)%.o)
 

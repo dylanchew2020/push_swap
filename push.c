@@ -1,19 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 13:49:38 by lchew             #+#    #+#             */
-/*   Updated: 2023/02/28 14:21:21 by lchew            ###   ########.fr       */
+/*   Created: 2023/03/01 15:45:30 by lchew             #+#    #+#             */
+/*   Updated: 2023/03/01 16:13:17 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(void)
+void	pa(t_stack *stack)
 {
-	write(1, "Hello World!\n", 14);
-	return (0);
+	t_node	*tmp;
+
+	if (stack->b != NULL)
+	{
+		tmp = stack->b->next;
+		ft_lstadd_front(&(stack->a), stack->b);
+		stack->b = tmp;
+	}
+}
+
+void	pb(t_stack *stack)
+{
+	t_node	*tmp;
+
+	if (stack->a != NULL)
+	{
+		tmp = stack->a->next;
+		ft_lstadd_front(&(stack->b), stack->a);
+		stack->a = tmp;
+	}
 }

@@ -10,14 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
 # include "libft.h"
-# include <fcntl.h>
+# include <stdarg.h>
 
-# define BUFFER_SIZE 1000
+# define PTR_INIT_L "0x"
+# define PTR_INIT_U "0X"
 
-char		*get_next_line(int fd);
+int		ft_printf(const char *str, ...);
 
 #endif
