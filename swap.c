@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:11:05 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/01 15:43:00 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/01 18:54:44 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 void	sa(t_stack *stack)
 {
-	int	tmp;
+	char	*tmp;
 
 	if (stack->a != NULL && stack->a != NULL && stack->a->next != NULL)
 	{
-		tmp = stack->a->data;
-		stack->a->data = stack->a->next->data;
-		stack->a->next->data = tmp;
+		tmp = stack->a->content;
+		stack->a->content = stack->a->next->content;
+		stack->a->next->content = tmp;
 	}
 }
 
 void	sb(t_stack *stack)
 {
-	int	tmp;
+	char	*tmp;
 
 	if (stack->b != NULL && stack->b != NULL && stack->b->next != NULL)
 	{
-		tmp = stack->b->data;
-		stack->b->data = stack->b->next->data;
-		stack->b->next->data = tmp;
+		tmp = stack->b->content;
+		stack->b->content = stack->b->next->content;
+		stack->b->next->content = tmp;
 	}
 }
 

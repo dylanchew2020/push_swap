@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:45:30 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/01 16:13:17 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/01 18:53:54 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	pa(t_stack *stack)
 {
-	t_node	*tmp;
+	t_list	*tmp;
 
 	if (stack->b != NULL)
 	{
@@ -26,7 +26,7 @@ void	pa(t_stack *stack)
 
 void	pb(t_stack *stack)
 {
-	t_node	*tmp;
+	t_list	*tmp;
 
 	if (stack->a != NULL)
 	{

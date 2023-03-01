@@ -15,7 +15,7 @@ NAME	=	push_swap
 
 # SOURCE CODE
 SRC_DIR = ./
-SRC	= push_swap.c
+SRC	= push_swap.c swap.c push.c rotate.c reverse_rotate.c
 OBJ_DIR = ./obj/
 OBJ	=	$(SRC:%.c=$(OBJ_DIR)%.o)
 
@@ -62,8 +62,11 @@ $(OBJ_DIR):
 $(LIBFT):
 	@ $(MAKE) -C $(LIBFT_DIR)
 
-test:
+run:
 	@ ./push_swap 2 1 3 6 5 8
+	
+run:
+	@ ./push_swap "2 1 3 6 5 8"
 	
 clean:
 	@ $(RM) $(OBJ)
