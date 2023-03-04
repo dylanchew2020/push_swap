@@ -15,7 +15,10 @@ NAME	=	push_swap
 
 # SOURCE CODE
 SRC_DIR = ./
-SRC	= push_swap.c swap.c push.c rotate.c reverse_rotate.c
+SRC	= push_swap.c swap.c push.c rotate.c reverse_rotate.c \
+		$(addprefix ps_, $(addsuffix .c, \
+		lstnew lstadd_front lstsize lstlast lstadd_back lstdelone \
+		lstclear))
 OBJ_DIR = ./obj/
 OBJ	=	$(SRC:%.c=$(OBJ_DIR)%.o)
 
@@ -29,7 +32,7 @@ LIB := -lft -L./libft
 
 # HEADER
 INC_DIR = ./
-INC		=	$(INC_DIR)
+INC		= -I$(INC_DIR)
 
 # COMPILATION
 CC			=	gcc
@@ -49,7 +52,7 @@ _INFO		=	[$(YELLOW)INFO$(RESET)]
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ_DIR) $(OBJ)
-	@ ${CC} $(CFLAGS) -Ilibft ${OBJ} ${LIB} -o $@ -fsanitize=address
+	@ ${CC} $(CFLAGS) ${OBJ} $(INC) ${LIB} -o $@ -fsanitize=address
 	@ printf "$(_SUCCESS) Program Installation Completed\n\n"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
@@ -65,7 +68,7 @@ $(LIBFT):
 run:
 	@ ./push_swap 2 1 3 6 5 8
 	
-run:
+run2:
 	@ ./push_swap "2 1 3 6 5 8"
 	
 clean:

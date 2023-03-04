@@ -19,9 +19,7 @@ SRC = $(addprefix ft_, $(addsuffix .c, \
 		memset memcpy memmove memchr memcmp atoi bzero calloc\
 		strlen strlcpy strlcat strncmp strchr strrchr strnstr strdup \
 		substr strjoin strtrim split itoa itoa_u itoa_base strmapi striteri \
-		putchar_fd putstr_fd putendl_fd putnbr_fd printf \
-		lstnew lstadd_front lstsize lstlast lstadd_back lstdelone \
-		lstclear lstiter lstmap)) get_next_line.c
+		putchar_fd putstr_fd putendl_fd putnbr_fd printf)) get_next_line.c
 OBJ_DIR = ./obj/
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
 
@@ -57,7 +55,7 @@ $(NAME): $(OBJ_DIR) $(OBJ)
 	@ printf "$(_SUCCESS) Library created!\n"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@ $(CC) $(CFLAGS) -Iincludes -c $< -o $@
+	@ $(CC) $(CFLAGS) $(HEAD) -c $< -o $@
 	@ printf "$(YELLOW)$<$(RESET)... "
 
 $(OBJ_DIR):
@@ -67,7 +65,7 @@ $(OBJ_DIR):
 	@ printf "$(_INFO) Generating Libft object files...\n"
 	
 clean:
-	@ $(RM) $(OBJ) ${B_OBJ}
+	@ $(RM) $(OBJ)
 	@ $(RMDIR) $(OBJ_DIR)
 	@ printf "$(_INFO) Libft object files & directory removed.\n"
 

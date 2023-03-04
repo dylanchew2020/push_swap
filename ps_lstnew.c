@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   ps_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 15:45:30 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/04 18:36:17 by lchew            ###   ########.fr       */
+/*   Created: 2022/05/30 13:04:24 by lchew             #+#    #+#             */
+/*   Updated: 2023/03/04 18:12:01 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	pa(t_stack *stack)
+/*
+**	Allocates (with malloc(3)) and returns a new node. The member variable 
+**	'content' is initialized with the value of the parameter 'content'. 
+**	The variable 'next' is initialized to NULL.
+*/
+t_node	*ps_lstnew(int data)
 {
-	t_node	*tmp;
+	t_node	*node;
 
-	if (stack->b != NULL)
-	{
-		tmp = stack->b->next;
-		ps_lstadd_front(&(stack->a), stack->b);
-		stack->b = tmp;
-	}
-	ft_printf("%i\n", pa);
-}
-
-void	pb(t_stack *stack)
-{
-	t_node	*tmp;
-
-	if (stack->a != NULL)
-	{
-		tmp = stack->a->next;
-		ps_lstadd_front(&(stack->b), stack->a);
-		stack->a = tmp;
-	}
-	ft_printf("%i\n", pb);
+	node = ft_calloc(1, sizeof(t_node));
+	if (!node)
+		return (NULL);
+	node->data = data;
+	node->next = NULL;
+	return (node);
 }
