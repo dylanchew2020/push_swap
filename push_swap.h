@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:49:36 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/04 18:26:41 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/05 21:35:17 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include "libft/includes/get_next_line.h"
 # include "libft/includes/ft_printf.h"
 # include <stdio.h>
+
+# define M_SIZE 5
+# define MAX_INT_LEN 11 //Min INT -2147483548
 
 typedef struct s_node
 {
@@ -35,10 +38,14 @@ typedef struct s_stack
 	t_node	*b;
 	int		size;
 	char	**tmp_array;
+	int		*num_array;
 }				t_stack;
 
 void	stack_init(t_stack *stack);
-void	insert_arg(t_stack *stack, int argc, char **argv);
+void	insert_arg(t_stack *stack);
+int		medianofmedian(char **array);
+int		get_median(int *array, int size);
+void	free2d(int **array, int size);
 
 // LINKED LIST FUNCTIONS
 t_node	*ps_lstnew(int data);

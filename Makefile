@@ -66,10 +66,10 @@ $(LIBFT):
 	@ $(MAKE) -C $(LIBFT_DIR)
 
 run:
-	@ ./push_swap 2 1 3 6 5 8
+	@ ./push_swap 9 1 8 6 5 4 3 7 2
 	
 run2:
-	@ ./push_swap "2 1 3 6 5 8"
+	@ ./push_swap "9 1 8 6 5 4 3 7 2"
 	
 clean:
 	@ $(RM) $(OBJ)

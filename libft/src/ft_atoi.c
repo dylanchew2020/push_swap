@@ -15,10 +15,10 @@
 **	by str to int representation.
 */
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
-	int	res;
-	int	sign;
+	long	res;
+	int		sign;
 
 	res = 0;
 	sign = 1;

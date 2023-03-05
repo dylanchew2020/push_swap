@@ -48,6 +48,8 @@ int		ft_isprint(int c);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 
+void	ft_swap(int *a, int *b);
+
 void	*ft_memset(void *b, int c, size_t len);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t len);
@@ -63,7 +65,7 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strdup(const char *src);
 
-int		ft_atoi(const char *str);
+long	ft_atoi(const char *str);
 
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);

@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:49:38 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/05 21:30:08 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/05 19:49:49 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,17 @@ int	main(int argc, char *argv[])
 	else
 		stack.tmp_array = ++argv;
 	insert_arg(&stack);
+	stack.num_array = ft_calloc(stack.size, sizeof(char));
 	while (stack.a)
 	{
-		printf("a: %i \n", stack.a->data);
+		printf("a: %i ", stack.a->data);
+		*stack.num_array = stack.a->data;
+		printf("list: %i\n", *stack.num_array);
+		++stack.num_array;
 		stack.a = stack.a->next;
 	}
-	printf("Stack_size: %i\n", stack.size);
-	printf("median: %i\n", medianofmedian(stack.tmp_array));
+	printf("%i\n", stack.size);
+	printf("%i\n", medianofmedian(stack.num_array, stack.size));
 	return (0);
 }
 
@@ -47,62 +51,64 @@ void	stack_init(t_stack *stack)
 void	insert_arg(t_stack *stack)
 {
 	t_node	*head;
-	char	**tmp;
 
-	tmp = stack->tmp_array;
-	head = ps_lstnew(ft_atoi(*tmp++));
+	head = ps_lstnew(ft_atoi(*stack->tmp_array++));
 	stack->a = head;
-	while (*tmp)
+	while (*stack->tmp_array)
 	{
-		head->next = ps_lstnew(ft_atoi(*tmp++));
+		head->next = ps_lstnew(ft_atoi(*stack->tmp_array++));
 		head = head->next;
 	}
 	stack->size = ps_lstsize(stack->a);
 }
 
-int	medianofmedian(char **array)
+int	medianofmedian(int *num_array, int size)
 {
 	int		median;
-	int		size;
-	char	**array_of_median;
-	int		*partition;
+	int		*tmp;
+	int		**partition;
 	int		partition_size;
-	int		n;
+	int		*n;
 	int		i;
 	int		j;
 
 	median = 0;
-	array_of_median = NULL;
+	tmp = NULL;
 	partition = NULL;
 	partition_size = 0;
-	size = 0;
-	n = 0;
-	i = 0;
-	while (array[size] != NULL)
-		++size;
 	if (size <= M_SIZE)
 	{
-		partition = ft_calloc(size, sizeof(int));
-		while (array[i] != NULL)
-		{
-			partition[i] = ft_atoi(array[i]);
-			++i;
-		}
-		median = get_median(partition, size);
+		median = get_median(num_array, size);
+		free(num_array);
 		return (median);
 	}
 	partition_size = size / M_SIZE + (size % M_SIZE != 0);
-	array_of_median = ft_calloc(partition_size + 1, sizeof(char *));
-	partition = ft_calloc(M_SIZE, sizeof(int));
-	while (array[i] != NULL)
+	partition = ft_calloc(partition_size, sizeof(int *));
+	n = ft_calloc(partition_size, sizeof(int *));
+	i = 0;
+	while (size > 0)
 	{
 		j = 0;
-		while (j < M_SIZE && array[i] != NULL)
-			partition[j++] = ft_atoi(array[i++]);
-		array_of_median[n] = ft_itoa(get_median(partition, j));
-		++n;
+		partition[i] = ft_calloc(M_SIZE, sizeof(int));
+		while (j < M_SIZE && size > 0)
+		{
+			partition[i][j++] = *num_array++;
+			--size;
+		}
+		n[i] = j;
+		++i;
 	}
-	median = medianofmedian(array_of_median);
+	tmp = ft_calloc(partition_size, sizeof(int));
+	i = 0;
+	while (i < partition_size)
+	{
+		tmp[i] = get_median(partition[i], n[i]);
+		++i;
+	}
+	free2d(partition, i);
+	free(n);
+	medianofmedian(tmp, i);
+	free(tmp);
 	return (median);
 }
 
@@ -117,7 +123,7 @@ int	get_median(int *array, int size)
 	while (i < size)
 	{
 		j = i;
-		while (j + 1 < size && array[j] > array [j + 1])
+		while (array[j] > array [j + 1])
 		{
 			ft_swap(&array[j], &array[j + 1]);
 			if (j > 0)

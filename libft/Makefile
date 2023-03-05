@@ -16,7 +16,7 @@ NAME = libft.a
 SRC_DIR = ./src/
 SRC = $(addprefix ft_, $(addsuffix .c, \
 		isalpha isdigit isalnum isascii isprint toupper tolower \
-		memset memcpy memmove memchr memcmp atoi bzero calloc\
+		swap memset memcpy memmove memchr memcmp atoi bzero calloc\
 		strlen strlcpy strlcat strncmp strchr strrchr strnstr strdup \
 		substr strjoin strtrim split itoa itoa_u itoa_base strmapi striteri \
 		putchar_fd putstr_fd putendl_fd putnbr_fd printf)) get_next_line.c
