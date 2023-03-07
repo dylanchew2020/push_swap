@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:49:38 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/05 21:30:08 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/07 21:10:57 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 int	main(int argc, char *argv[])
 {
-	int		i;
 	t_stack	stack;
 
-	i = 1;
 	if (argc < 2)
 		return (1);
 	stack_init(&stack);
@@ -26,24 +24,82 @@ int	main(int argc, char *argv[])
 	else
 		stack.tmp_array = ++argv;
 	insert_arg(&stack);
-	while (stack.a)
-	{
-		printf("a: %i \n", stack.a->data);
-		stack.a = stack.a->next;
-	}
-	printf("Stack_size: %i\n", stack.size);
-	printf("median: %i\n", medianofmedian(stack.tmp_array));
+	push(&stack, stack.tmp_array, stack.size_a);
 	return (0);
+}
+
+// void	swap_two(t_stack *stack)
+// {
+// 	if (ps_lstsize())
+// }
+
+void	push(t_stack *stack, char **array, int size)
+{
+	int		i;
+	char	**tmp_array;
+	t_node	*tmp;
+
+	i = 0;
+	if (stack->size_a > 2)
+	{
+		stack->pivot = medianofmedian(array);
+		printf("1 - Size_a: %i, Size_b: %i, Pivot: %i\n", stack->size_a, stack->size_b, stack->pivot);
+		print_stack(stack->a, stack->b);
+		while (stack->a && i++ < size)
+		{
+			printf("2 - Size_a: %i, Size_b: %i, Pivot: %i\n", stack->size_a, stack->size_b, stack->pivot);
+			print_stack(stack->a, stack->b);
+			if (stack->a->data < stack->pivot)
+				pb(stack);
+			else
+				ra(stack);
+			printf("3 - Size_a: %i, Size_b: %i, Pivot: %i\n", stack->size_a, stack->size_b, stack->pivot);
+			print_stack(stack->a, stack->b);
+		}
+		printf("4 - Size_a: %i, Size_b: %i, Pivot: %i\n", stack->size_a, stack->size_b, stack->pivot);
+		print_stack(stack->a, stack->b);
+		tmp = stack->a;
+		i = 0;
+		tmp_array = ft_calloc(stack->size_a, sizeof(char *));
+		while (tmp)
+		{
+			tmp_array[i++] = ft_itoa(tmp->data);
+			tmp = tmp->next;
+		}
+		push(stack, tmp_array, stack->size_a);
+	}
 }
 
 void	stack_init(t_stack *stack)
 {
 	stack->a = NULL;
 	stack->b = NULL;
-	stack->size = 1;
+	stack->size_total = 0;
+	stack->size_a = 0;
+	stack->size_b = 0;
 	stack->tmp_array = NULL;
 }
 
+void	print_stack(t_node *a, t_node *b)
+{
+	while (a || b)
+	{
+		if (a)
+		{
+			printf("a: %i   |   ", a->data);
+			a = a->next;
+		}
+		else
+			printf("a: %p   |   ", a);
+		if (b)
+		{
+			printf("b: %i\n", b->data);
+			b = b->next;
+		}
+		else
+			printf("b: %p\n", b);
+	}
+}
 void	insert_arg(t_stack *stack)
 {
 	t_node	*head;
@@ -57,78 +113,8 @@ void	insert_arg(t_stack *stack)
 		head->next = ps_lstnew(ft_atoi(*tmp++));
 		head = head->next;
 	}
-	stack->size = ps_lstsize(stack->a);
-}
-
-int	medianofmedian(char **array)
-{
-	int		median;
-	int		size;
-	char	**array_of_median;
-	int		*partition;
-	int		partition_size;
-	int		n;
-	int		i;
-	int		j;
-
-	median = 0;
-	array_of_median = NULL;
-	partition = NULL;
-	partition_size = 0;
-	size = 0;
-	n = 0;
-	i = 0;
-	while (array[size] != NULL)
-		++size;
-	if (size <= M_SIZE)
-	{
-		partition = ft_calloc(size, sizeof(int));
-		while (array[i] != NULL)
-		{
-			partition[i] = ft_atoi(array[i]);
-			++i;
-		}
-		median = get_median(partition, size);
-		return (median);
-	}
-	partition_size = size / M_SIZE + (size % M_SIZE != 0);
-	array_of_median = ft_calloc(partition_size + 1, sizeof(char *));
-	partition = ft_calloc(M_SIZE, sizeof(int));
-	while (array[i] != NULL)
-	{
-		j = 0;
-		while (j < M_SIZE && array[i] != NULL)
-			partition[j++] = ft_atoi(array[i++]);
-		array_of_median[n] = ft_itoa(get_median(partition, j));
-		++n;
-	}
-	median = medianofmedian(array_of_median);
-	return (median);
-}
-
-int	get_median(int *array, int size)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	if (size == 1)
-		return (array[i]);
-	while (i < size)
-	{
-		j = i;
-		while (j + 1 < size && array[j] > array [j + 1])
-		{
-			ft_swap(&array[j], &array[j + 1]);
-			if (j > 0)
-				--j;
-		}
-		++i;
-	}
-	if (size % 2 == 0)
-		return ((array[(size - 1) / 2] + array[size / 2]) / 2);
-	else
-		return (array[size / 2]);
+	stack->size_total = ps_lstsize(stack->a);
+	stack->size_a = stack->size_total;
 }
 
 void	free2d(int **array, int size)

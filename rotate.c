@@ -6,12 +6,16 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:38:39 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/04 18:37:47 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/07 18:42:23 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/* 
+	Shift up all elements of stack a by 1.
+	The first element becomes the last one.
+ */
 void	ra(t_stack *stack)
 {
 	t_node	*second;
@@ -22,9 +26,13 @@ void	ra(t_stack *stack)
 	stack->a->next = NULL;
 	last->next = stack->a;
 	stack->a = second;
-	ft_printf("%i\n", ra);
+	write(1, "ra\n", 4);
 }
 
+/* 
+	Shift up all elements of stack b by 1.
+	The first element becomes the last one.
+ */
 void	rb(t_stack *stack)
 {
 	t_node	*second;
@@ -35,12 +43,15 @@ void	rb(t_stack *stack)
 	stack->b->next = NULL;
 	last->next = stack->b;
 	stack->b = second;
-	ft_printf("%i\n", rb);
+	write(1, "rb\n", 4);
 }
 
+/* 
+	ra and rb at the same time.
+ */
 void	rr(t_stack *stack)
 {
 	ra(stack);
 	rb(stack);
-	ft_printf("%i\n", rr);
+	write(1, "rr\n", 4);
 }

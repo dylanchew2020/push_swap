@@ -6,12 +6,16 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:11:05 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/04 18:36:41 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/07 18:43:42 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/* 
+	Swap the first 2 elements at the top of stack a.
+	Do nothing if there is only one or no elements.
+ */
 void	sa(t_stack *stack)
 {
 	int	tmp;
@@ -22,9 +26,13 @@ void	sa(t_stack *stack)
 		stack->a->data = stack->a->next->data;
 		stack->a->next->data = tmp;
 	}
-	ft_printf("%i\n", sa);
+	write(1, "sa\n", 4);
 }
 
+/* 
+	Swap the first 2 elements at the top of stack b.
+	Do nothing if there is only one or no elements.
+ */
 void	sb(t_stack *stack)
 {
 	int	tmp;
@@ -35,12 +43,15 @@ void	sb(t_stack *stack)
 		stack->b->data = stack->b->next->data;
 		stack->b->next->data = tmp;
 	}
-	ft_printf("%i\n", sb);
+	write(1, "sb\n", 4);
 }
 
+/* 
+	sa and sb at the same time.
+ */
 void	ss(t_stack *stack)
 {
 	sa(stack);
 	sb(stack);
-	ft_printf("%i\n", ss);
+	write(1, "ss\n", 4);
 }

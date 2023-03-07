@@ -15,7 +15,7 @@ NAME	=	push_swap
 
 # SOURCE CODE
 SRC_DIR = ./
-SRC	= push_swap.c swap.c push.c rotate.c reverse_rotate.c \
+SRC	= push_swap.c swap.c push.c rotate.c reverse_rotate.c get_median.c\
 		$(addprefix ps_, $(addsuffix .c, \
 		lstnew lstadd_front lstsize lstlast lstadd_back lstdelone \
 		lstclear))
@@ -66,10 +66,12 @@ $(LIBFT):
 	@ $(MAKE) -C $(LIBFT_DIR)
 
 run:
-	@ ./push_swap 9 1 8 6 5 4 3 7 2
+	@ ./push_swap 12 5 14 16 18 1 8 19 15 6 7 2 9 10 11 4 17 3 13
+
+
 	
 run2:
-	@ ./push_swap "9 1 8 6 5 4 3 7 2"
+	@ ./push_swap "12 5 14 16 18 1 8 19 15 6 7 2 9 10 11 4 17 3 13"
 	
 clean:
 	@ $(RM) $(OBJ)
