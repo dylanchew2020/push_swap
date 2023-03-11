@@ -6,13 +6,64 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:30:00 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/07 13:30:40 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/11 20:30:02 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	medianofmedian(char **array)
+int	get_median(t_node *head)
+{
+	int		n;
+
+	if (head == NULL)
+		return (0);
+	if (head->next == NULL)
+		return (head->data);
+	index_stack(head);
+	n = ps_lstsize(head);
+	if (n % 2 == 0)
+		n = n / 2;
+	else
+		n = (n / 2) + 1;
+	while (head != NULL)
+	{
+		if (head->index == n)
+			break ;
+		head = head->next;
+	}
+	return (head->data);
+}
+
+void	index_stack(t_node *head)
+{
+	int		n;
+	int		count;
+	t_node	*node;
+	t_node	*tmp;
+
+	n = 0;
+	node = head;
+	tmp = head;
+	while (tmp != NULL)
+	{
+		count = 1;
+		n = tmp->data;
+		printf("n = %i\n", n);
+		while (node != NULL)
+		{
+			if (n > node->data)
+				++count;
+			node = node->next;
+		}
+		tmp->index = count;
+		printf("index = %i\n", tmp->index);
+		tmp = tmp->next;
+		node = head;
+	}
+}
+
+/* int	medianofmedian(char **array)
 {
 	int		pivot;
 	int		size;
@@ -82,4 +133,4 @@ int	get_median(int *array, int size)
 		return ((array[(size - 1) / 2] + array[size / 2]) / 2);
 	else
 		return (array[size / 2]);
-}
+} */

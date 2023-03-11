@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:04:24 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/04 18:12:01 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/11 17:36:47 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_node	*ps_lstnew(int data)
 	if (!node)
 		return (NULL);
 	node->data = data;
+	node->index = 0;
 	node->next = NULL;
 	return (node);
 }
