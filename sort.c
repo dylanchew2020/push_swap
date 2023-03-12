@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 15:44:07 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/11 20:32:07 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/12 19:59:09 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,81 +16,133 @@ void	sort_two(t_stack *stack, char input)
 {
 	if (input == 'a' && stack->a->data > stack->a->next->data)
 		sa(stack);
-	else if (input == 'b' && stack->b->data < stack->b->next->data)
-		sb(stack);
-}
-
-void	sort_a(t_stack *stack)
-{
-	int	size;
-	int	pivot;
-	
-	if (stack->size_a % 2 == 0)
-		size = stack->size_a / 2;
-	else
-		size = (stack->size_a / 2) + 1;
-	if (stack->size_a == 2)
-		sort_two(stack, 'a');
-	else if (stack->size_a > 2)
+	if (input == 'b')
 	{
-		pivot = get_median(stack->a);
-		print(stack, 1, 'a', pivot);
-		while (size > 0)
-		{
-			print(stack, 2, 'a', pivot);
-			if (stack->a->data <= pivot)
-			{
-				pb(stack);
-				--size;
-			}
-			else
-				ra(stack);
-			print(stack, 3, 'a', pivot);
-		}
-		print(stack, 4, 'a', pivot);
-		sleep(1);
-		printf("========FROM A ENTER A==========\n");
-		sort_a(stack);
-		printf("========EXIT A BACK A==========\n");
-		// printf("========FROM A ENTER B==========\n");
-		// sort_b(stack);
-		// printf("========EXIT B END A==========\n");
+		if (stack->b->data < stack->b->next->data)
+			sb(stack);
+		pa(stack);
+		pa(stack);
 	}
 }
 
-void	sort_b(t_stack *stack)
+/* 
+456
+465 2 456
+546 1 456
+564 2 546 3 456
+645 1 465 2 456
+654 1 564 2 546 3 456
+*/
+
+void	sort_three(t_stack *stack, char input)
 {
-	int	size;
-	int	pivot;
-	
-	if (stack->size_b % 2 == 0)
-		size = stack->size_b / 2;
-	else
-		size = (stack->size_b / 2) + 1;
-	if (stack->size_b == 2)
-		sort_two(stack, 'b');
-	else if (stack->size_b > 2)
+	int		i;
+
+	i = 0;
+	if (input == 'a')
 	{
-		pivot = get_median(stack->b);
-		print(stack, 1, 'b', pivot);
-		while (stack->b)
+		if (stack->a->data > stack->a->next->data)
+			sa(stack);
+		if (stack->a->next->data > stack->a->next->next->data)
 		{
-			print(stack, 2, 'b', pivot);
+			ra(stack);
+			sa(stack);
+			rra(stack);
+		}
+		if (stack->a->data > stack->a->next->data)
+			sa(stack);
+	}
+	else if (input == 'b')
+	{
+		// print_stack(stack->a, stack->b);
+		if (stack->b->data < stack->b->next->data)
+			sb(stack);
+		// print_stack(stack->a, stack->b);
+		if (stack->b->next->data < stack->b->next->next->data)
+		{
+			rb(stack);
+			sb(stack);
+			rrb(stack);
+		}
+		// print_stack(stack->a, stack->b);
+		if (stack->b->data < stack->b->next->data)
+			sb(stack);
+		// print_stack(stack->a, stack->b);
+		while (i++ < 3)
+			pa(stack);
+	}
+}
+
+void	sort_a(t_stack *stack, int push_size)
+{
+	int	pivot;
+	int	push;
+	int	rotate;
+
+	push = 0;
+	rotate = 0;
+	if (push_size == 2)
+		sort_two(stack, 'a');
+	if (push_size == 3)
+		sort_three(stack, 'a');
+	else if (push_size > 3)
+	{
+		pivot = get_median(stack->a, push_size);
+		// print(stack, 1, 'a', pivot, push_size);
+		while (push < push_size / 2)
+		{
+			if (stack->a->data < pivot)
+			{
+				pb(stack);
+				++push;
+			}
+			else
+			{
+				ra(stack);
+				++rotate;
+			}
+		}
+		while (rotate-- > 0)
+			rra(stack);
+		// print(stack, 2, 'a', pivot, push_size);
+		sort_a(stack, push_size - push);
+		sort_b(stack, push);
+	}
+}
+
+void	sort_b(t_stack *stack, int push_size)
+{
+	int	pivot;
+	int	push;
+	int	rotate;
+
+	push = 0;
+	rotate = 0;
+	if (push_size == 2)
+		sort_two(stack, 'b');
+	if (push_size == 3)
+		sort_three(stack, 'b');
+	else if (push_size > 3)
+	{
+		pivot = get_median(stack->b, push_size);
+		// print(stack, 1, 'b', pivot, push_size);
+		while (push < (push_size % 2 == 0 ? push_size / 2 : (push_size / 2) + 1))
+		{
 			if (stack->b->data >= pivot)
 			{
 				pa(stack);
+				++push;
 			}
 			else
-				rrb(stack);
-			print(stack, 3, 'b', pivot);
+			{
+				rb(stack);
+				++rotate;
+			}
 		}
-		print(stack, 4, 'b', pivot);
-		sleep(1);
-		printf("========FROM B ENTER B==========\n");
-		sort_b(stack);
-		printf("========EXIT B BACK B==========\n");
-		// printf("========FROM B ENTER A==========\n");
-		// sort_a(stack, tmp_array_a, i);
-		// printf("========EXIT A END B==========\n");
+		while (rotate-- > 0)
+			rrb(stack);
+		// print(stack, 2, 'b', pivot, push_size);
+		sort_a(stack, push);
+		sort_b(stack, push_size - push);
 	}
 }

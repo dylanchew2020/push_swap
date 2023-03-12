@@ -6,26 +6,24 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:30:00 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/11 20:30:02 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/12 19:35:42 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_median(t_node *head)
+int	get_median(t_node *head, int size)
 {
 	int		n;
 
+	// printf("Size input into get_median = %i\n", size);
 	if (head == NULL)
 		return (0);
 	if (head->next == NULL)
 		return (head->data);
-	index_stack(head);
-	n = ps_lstsize(head);
-	if (n % 2 == 0)
-		n = n / 2;
-	else
-		n = (n / 2) + 1;
+	index_stack(head, size);
+	n = (size / 2) + 1;
+	// printf("n = %i\n", n);
 	while (head != NULL)
 	{
 		if (head->index == n)
@@ -35,29 +33,36 @@ int	get_median(t_node *head)
 	return (head->data);
 }
 
-void	index_stack(t_node *head)
+void	index_stack(t_node *head, int size)
 {
 	int		n;
 	int		count;
 	t_node	*node;
 	t_node	*tmp;
+	int		limit;
+	int		i;
 
 	n = 0;
 	node = head;
 	tmp = head;
-	while (tmp != NULL)
+	limit = size;
+	// printf("limit = %i | ", limit);
+	while (tmp != NULL && size-- > 0)
 	{
 		count = 1;
+		i = 0;
 		n = tmp->data;
-		printf("n = %i\n", n);
-		while (node != NULL)
+		// printf("n = %i | ", n);
+		while (node != NULL && i++ < limit)
 		{
+			// printf("n = %i | node->data = %i\n", n, node->data);
 			if (n > node->data)
 				++count;
 			node = node->next;
+			// printf("count = %i | limit = %i\n", count, limit);
 		}
 		tmp->index = count;
-		printf("index = %i\n", tmp->index);
+		// printf("%i\n", tmp->index);
 		tmp = tmp->next;
 		node = head;
 	}

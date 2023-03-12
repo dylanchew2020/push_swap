@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:49:38 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/11 20:23:55 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/12 20:00:31 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ int	main(int argc, char *argv[])
 	else
 		stack.tmp_array = ++argv;
 	insert_arg(&stack);
-	sort_a(&stack);
-	print_stack(stack.a, stack.b);
+	// print_stack(stack.a, stack.b);
+	sort_a(&stack, stack.size_a);
+	// print_stack(stack.a, stack.b);
 	return (0);
 }
 
@@ -37,6 +38,7 @@ void	stack_init(t_stack *stack)
 	stack->size_a = 0;
 	stack->size_b = 0;
 	stack->tmp_array = NULL;
+	stack->recursion_count = 0;
 }
 
 void	insert_arg(t_stack *stack)
@@ -71,30 +73,27 @@ void	free2d(int **array, int size)
 	free(array);
 }
 
-void	print(t_stack *stack, int num, char c, int pivot)
+void	print(t_stack *stack, int num, char c, int pivot, int push_size)
 {
-	printf("%c%i - Size_a: %i, Size_b: %i, Pivot: %i\n", c, num, stack->size_a, stack->size_b, pivot);
+	printf("%c%i - Size_a: %i, Size_b: %i, Median: %i, PS = %i\n", c, num, stack->size_a, stack->size_b, pivot, push_size);
 	print_stack(stack->a, stack->b);
 	printf("=======================\n");
 }
 
 void	print_stack(t_node *a, t_node *b)
 {
-	while (a || b)
+	printf("a: ");
+	while (a)
 	{
-		if (a)
-		{
-			printf("a: %i   |   ", a->data);
-			a = a->next;
-		}
-		else
-			printf("a: %p   |   ", a);
-		if (b)
-		{
-			printf("b: %i\n", b->data);
-			b = b->next;
-		}
-		else
-			printf("b: %p\n", b);
+		printf("%i ", a->data);
+		a = a->next;
 	}
+	printf("\n");
+	printf("b: ");
+	while (b)
+	{
+		printf("%i ", b->data);
+		b = b->next;
+	}
+	printf("\n");
 }

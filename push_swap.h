@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:49:36 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/11 20:24:06 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/12 18:30:59 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_stack
 	int		size_b;
 	char	**tmp_array;
 	int		*num_array;
+	int		recursion_count;
 }				t_stack;
 
 typedef struct s_partition
@@ -55,17 +56,18 @@ typedef struct s_partition
 
 void	stack_init(t_stack *stack);
 void	insert_arg(t_stack *stack);
-int		get_median(t_node *head);
-void	index_stack(t_node *node);
-void	print(t_stack *stack, int num, char c, int pivot);
+int		get_median(t_node *head, int size);
+void	index_stack(t_node *node, int size);
+void	print(t_stack *stack, int num, char c, int pivot, int push_size);
 void	print_stack(t_node *a, t_node *b);
 // int		medianofmedian(char **array);
 // char	**get_array_of_median(int size, char **array);
 // int		get_median(int *array, int size);
 void	free2d(int **array, int size);
-void	sort_a(t_stack *stack);
-void	sort_b(t_stack *stack);
+void	sort_a(t_stack *stack, int push_size);
+void	sort_b(t_stack *stack, int push_size);
 void	sort_two(t_stack *stack, char input);
+void	sort_three(t_stack *stack, char input);
 // void	sort_three(t_stack *stack, char input);
 
 // LINKED LIST FUNCTIONS
@@ -96,6 +98,7 @@ void	rb(t_stack *stack);
 void	rr(t_stack *stack);
 
 //REVERSE ROTATE FUNCTIONS
+
 void	rra(t_stack *stack);
 void	rrb(t_stack *stack);
 void	rrr(t_stack *stack);
