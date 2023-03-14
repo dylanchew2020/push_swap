@@ -14,7 +14,7 @@
 NAME	=	push_swap
 
 # SOURCE CODE
-SRC_DIR = ./
+SRC_DIR = ./src/
 SRC	= push_swap.c swap.c push.c rotate.c reverse_rotate.c get_median.c sort.c\
 		error.c $(addprefix ps_, $(addsuffix .c, \
 		lstnew lstadd_front lstsize lstlast lstadd_back lstdelone \
@@ -52,7 +52,7 @@ _INFO		=	[$(YELLOW)INFO$(RESET)]
 # OUTPUT
 OUTPUT = output.txt
 
-ARG = "5 9 13 15 16 8 19 6 11 2 4 12 10 3 7 14 18 20 1 17"
+ARG = "4 72 59 18 83 21 30 39 36 33 43 37 62 3 42 84 82 0 89 20 38 88 19 47 2 71 68 54 31 80 32 45 27 58 97 98 66 9 77 13 60 70 40 96 75 25 50 90 6 17 14 48 64 24 34 26 29 99 73 10 55 74 67 81 49 93 57 5 22 8 100 53 56 46 61 11 94 51 15 44 41 16 78 23 7 79 69 76 28 87 52 86 63 95 92 1 91 12 85 35"
 
 all: $(NAME)
 
@@ -61,7 +61,7 @@ $(NAME): $(LIBFT) $(OBJ_DIR) $(OBJ)
 	@ printf "$(_SUCCESS) Program Installation Completed\n\n"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@ $(CC) $(CFLAGS) -c $< -o $@
+	@ $(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(OBJ_DIR):
 	@ mkdir -p $(OBJ_DIR)
@@ -71,7 +71,7 @@ $(LIBFT):
 	@ $(MAKE) -C $(LIBFT_DIR)
 
 run:
-	@ ./push_swap 2147483648 0 -1 1 2147483647 -2147483648
+	@ ./push_swap 5 4 3 2 1
 	
 run2:
 	@ ./push_swap $(ARG)
@@ -79,8 +79,8 @@ run2:
 run3:
 	@ ./push_swap $(ARG) > $(OUTPUT)
 
-run_checker:
-	@ ./push_swap $(ARG) | ./checker_MAC $(ARG)
+run4:
+	@ ./push_swap $(ARG) | ./checker_OS $(ARG)
 	
 clean:
 	@ $(RM) $(OBJ)

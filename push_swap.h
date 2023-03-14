@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:49:36 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/14 18:14:49 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/14 19:41:21 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	sort_three_a(t_stack *stack);
 void	sort_three_b(t_stack *stack);
 int		push_a(t_stack *stack, int push_size, int pivot);
 int		push_b(t_stack *stack, int push_size, int pivot);
+int		check_sort_a(t_node *tmp, int size);
+int		check_sort_b(t_stack *stack, t_node *tmp, int size);
 
 // ERROR FUNCTIONS
 

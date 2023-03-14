@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:30:00 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/14 17:50:36 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/14 19:51:51 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	index_stack(t_stack *stack, t_node *head, int size)
 			if (id.n > id.node->data)
 				++id.count;
 			else if (id.tmp != id.node && id.n == id.node->data)
-				exit_with_error(1, stack);
+				exit_with_error(0, stack);
 			id.node = id.node->next;
 		}
 		id.tmp->index = id.count;
@@ -58,6 +58,32 @@ void	index_stack(t_stack *stack, t_node *head, int size)
 	}
 }
 
+int	check_sort_a(t_node *tmp, int size)
+{
+	while (tmp != NULL && --size > 0)
+	{
+		if (tmp->data > tmp->next->data)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+int	check_sort_b(t_stack *stack, t_node *tmp, int size)
+{
+	int	i;
+
+	i = 1;
+	while (tmp != NULL && i++ < size)
+	{
+		if (tmp->data < tmp->next->data)
+			return (1);
+		tmp = tmp->next;
+	}
+	while (size-- > 0)
+		pa(stack);
+	return (0);
+}
 /* int	medianofmedian(char **array)
 {
 	int		pivot;
