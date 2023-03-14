@@ -6,24 +6,22 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:30:00 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/12 19:35:42 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/14 17:50:36 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_median(t_node *head, int size)
+int	get_median(t_stack *stack, t_node *head, int size)
 {
 	int		n;
 
-	// printf("Size input into get_median = %i\n", size);
 	if (head == NULL)
 		return (0);
 	if (head->next == NULL)
 		return (head->data);
-	index_stack(head, size);
+	index_stack(stack, head, size);
 	n = (size / 2) + 1;
-	// printf("n = %i\n", n);
 	while (head != NULL)
 	{
 		if (head->index == n)
@@ -33,38 +31,30 @@ int	get_median(t_node *head, int size)
 	return (head->data);
 }
 
-void	index_stack(t_node *head, int size)
+void	index_stack(t_stack *stack, t_node *head, int size)
 {
-	int		n;
-	int		count;
-	t_node	*node;
-	t_node	*tmp;
-	int		limit;
-	int		i;
+	t_index	id;
 
-	n = 0;
-	node = head;
-	tmp = head;
-	limit = size;
-	// printf("limit = %i | ", limit);
-	while (tmp != NULL && size-- > 0)
+	id.n = 0;
+	id.node = head;
+	id.tmp = head;
+	id.limit = size;
+	while (id.tmp != NULL && size-- > 0)
 	{
-		count = 1;
-		i = 0;
-		n = tmp->data;
-		// printf("n = %i | ", n);
-		while (node != NULL && i++ < limit)
+		id.count = 1;
+		id.i = 0;
+		id.n = id.tmp->data;
+		while (id.node != NULL && id.i++ < id.limit)
 		{
-			// printf("n = %i | node->data = %i\n", n, node->data);
-			if (n > node->data)
-				++count;
-			node = node->next;
-			// printf("count = %i | limit = %i\n", count, limit);
+			if (id.n > id.node->data)
+				++id.count;
+			else if (id.tmp != id.node && id.n == id.node->data)
+				exit_with_error(1, stack);
+			id.node = id.node->next;
 		}
-		tmp->index = count;
-		// printf("%i\n", tmp->index);
-		tmp = tmp->next;
-		node = head;
+		id.tmp->index = id.count;
+		id.tmp = id.tmp->next;
+		id.node = head;
 	}
 }
 

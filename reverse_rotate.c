@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:48:06 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/12 20:17:06 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/14 18:13:53 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	rra(t_stack *stack)
 	second_last->next = NULL;
 	last->next = stack->a;
 	stack->a = last;
-	// write(1, "rra\n", 5);
 	ft_printf("rra\n");
 }
 
@@ -52,7 +51,6 @@ void	rrb(t_stack *stack)
 	second_last->next = NULL;
 	last->next = stack->b;
 	stack->b = last;
-	// write(1, "rrb\n", 5);
 	ft_printf("rrb\n");
 }
 
@@ -63,6 +61,5 @@ void	rrr(t_stack *stack)
 {
 	rra(stack);
 	rrb(stack);
-	// write(1, "rrr\n", 5);
 	ft_printf("rrr\n");
 }

@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:49:38 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/12 20:00:31 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/14 18:12:53 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@ int	main(int argc, char *argv[])
 		return (1);
 	stack_init(&stack);
 	if (argc == 2)
-		stack.tmp_array = ft_split(*(++argv), ' ');
+	{
+		stack.str_arg = ft_split(*(++argv), ' ');
+		insert_arg(&stack, 1, stack.str_arg);
+		free2d(stack.str_arg);
+	}
 	else
-		stack.tmp_array = ++argv;
-	insert_arg(&stack);
-	// print_stack(stack.a, stack.b);
+		insert_arg(&stack, 0, ++argv);
 	sort_a(&stack, stack.size_a);
-	// print_stack(stack.a, stack.b);
+	ps_lstclear(&stack.a);
 	return (0);
 }
 
@@ -34,66 +36,44 @@ void	stack_init(t_stack *stack)
 {
 	stack->a = NULL;
 	stack->b = NULL;
-	stack->size_total = 0;
 	stack->size_a = 0;
 	stack->size_b = 0;
-	stack->tmp_array = NULL;
-	stack->recursion_count = 0;
+	stack->str_arg = NULL;
+	stack->multi_arg = NULL;
 }
 
-void	insert_arg(t_stack *stack)
+void	insert_arg(t_stack *stack, int code, char **tmp)
 {
 	t_node	*head;
-	char	**tmp;
+	long	n;
 
-	tmp = stack->tmp_array;
-	head = ps_lstnew(ft_atoi(*tmp++));
+	error_non_integer(*tmp, code, stack);
+	n = ft_atoi(*tmp++);
+	if (n > INT_MAX || n < INT_MIN)
+		exit_with_error(code, stack);
+	head = ps_lstnew(n);
 	stack->a = head;
 	while (*tmp)
 	{
-		head->next = ps_lstnew(ft_atoi(*tmp++));
+		error_non_integer(*tmp, code, stack);
+		n = ft_atoi(*tmp++);
+		if (n > INT_MAX)
+			exit_with_error(code, stack);
+		head->next = ps_lstnew(n);
 		head = head->next;
 	}
-	stack->size_total = ps_lstsize(stack->a);
-	stack->size_a = stack->size_total;
+	stack->size_a = ps_lstsize(stack->a);
 }
 
-void	free2d(int **array, int size)
+void	free2d(char **array)
 {
-	int	**temp;
-	int	i;
+	char	**temp;
 
 	temp = array;
-	i = 0;
-	while (i < size)
+	while (temp != NULL && *temp != NULL)
 	{
 		free(*temp);
-		++i;
+		++temp;
 	}
 	free(array);
-}
-
-void	print(t_stack *stack, int num, char c, int pivot, int push_size)
-{
-	printf("%c%i - Size_a: %i, Size_b: %i, Median: %i, PS = %i\n", c, num, stack->size_a, stack->size_b, pivot, push_size);
-	print_stack(stack->a, stack->b);
-	printf("=======================\n");
-}
-
-void	print_stack(t_node *a, t_node *b)
-{
-	printf("a: ");
-	while (a)
-	{
-		printf("%i ", a->data);
-		a = a->next;
-	}
-	printf("\n");
-	printf("b: ");
-	while (b)
-	{
-		printf("%i ", b->data);
-		b = b->next;
-	}
-	printf("\n");
 }

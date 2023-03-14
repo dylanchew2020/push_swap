@@ -18,10 +18,9 @@
 **
 **	The memory of 'next' must not be freed.
 */
-void	ps_lstdelone(t_node *node, void (*del)(int))
+void	ps_lstdelone(t_node *node)
 {
 	if (!node)
 		return ;
-	del(node->data);
 	free(node);
 }

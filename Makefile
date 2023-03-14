@@ -16,7 +16,7 @@ NAME	=	push_swap
 # SOURCE CODE
 SRC_DIR = ./
 SRC	= push_swap.c swap.c push.c rotate.c reverse_rotate.c get_median.c sort.c\
-		$(addprefix ps_, $(addsuffix .c, \
+		error.c $(addprefix ps_, $(addsuffix .c, \
 		lstnew lstadd_front lstsize lstlast lstadd_back lstdelone \
 		lstclear))
 OBJ_DIR = ./obj/
@@ -49,10 +49,15 @@ RESET		=	\e[0m
 _SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
 _INFO		=	[$(YELLOW)INFO$(RESET)]
 
+# OUTPUT
+OUTPUT = output.txt
+
+ARG = "5 9 13 15 16 8 19 6 11 2 4 12 10 3 7 14 18 20 1 17"
+
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ_DIR) $(OBJ)
-	@ ${CC} $(CFLAGS) ${OBJ} $(INC) ${LIB} -o $@ -fsanitize=address
+	@ ${CC} $(CFLAGS) ${OBJ} $(INC) ${LIB} -o $@ #-fsanitize=address
 	@ printf "$(_SUCCESS) Program Installation Completed\n\n"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
@@ -66,10 +71,16 @@ $(LIBFT):
 	@ $(MAKE) -C $(LIBFT_DIR)
 
 run:
-	@ ./push_swap 302 997 335 769 686 782 705 536 405 553 881 154 293 935 88 254 726 234 22 371 31 766 631 60 320 388 983 576 313 693 933 459 205 607 463 225 349 967 355 703 107 47 491 905 845 811 998 11 442 378 30 45 772 694 610 7 488 916 761 391 4 842 855 194 443 776 85 826 255 672 956 851 81 608 433 202 521 616 675 890 148 55 1000 762 437 800 698 814 539 785 25 322 70 518 924 87 724 837 102 114
-		
+	@ ./push_swap 2147483648 0 -1 1 2147483647 -2147483648
+	
 run2:
-	@ ./push_swap "2 8 13 5 15 7 6 10 4 14 12 1 9 11 3"
+	@ ./push_swap $(ARG)
+
+run3:
+	@ ./push_swap $(ARG) > $(OUTPUT)
+
+run_checker:
+	@ ./push_swap $(ARG) | ./checker_MAC $(ARG)
 	
 clean:
 	@ $(RM) $(OBJ)
@@ -77,7 +88,7 @@ clean:
 	@ printf "$(_INFO) Object files & directory removed.\n"
 
 fclean: clean
-	@ $(RM) $(NAME)
+	@ $(RM) $(NAME) $(OUTPUT)
 	@ $(MAKE) fclean -C $(LIBFT_DIR)
 	@ printf "$(_INFO) Window cache cleared.\n"
 

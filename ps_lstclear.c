@@ -18,7 +18,7 @@
 **
 **	Finally, the pointer to the list must be set to NULL.
 */
-void	ps_lstclear(t_node **node, void (*del)(int))
+void	ps_lstclear(t_node **node)
 {
 	t_node	*temp;
 	t_node	*current;
@@ -30,7 +30,7 @@ void	ps_lstclear(t_node **node, void (*del)(int))
 	{
 		temp = current;
 		current = current->next;
-		ps_lstdelone(temp, del);
+		ps_lstdelone(temp);
 	}
 	*node = NULL;
 }
