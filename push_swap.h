@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:49:36 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/14 19:41:21 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/16 00:19:54 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,16 @@ typedef struct s_index
 	int		i;
 }				t_index;
 
+// MAIN FUNCTIONS
+
 void	stack_init(t_stack *stack);
 void	insert_arg(t_stack *stack, int code, char **tmp);
+void	free2d(char **array);
+
+// GET MEDIAN FUNCTIONS
+
 int		get_median(t_stack *stack, t_node *head, int size);
 void	index_stack(t_stack *stack, t_node *node, int size);
-void	free2d(char **array);
 
 // SORT FUNCTIONS
 
@@ -107,5 +112,22 @@ void	rr(t_stack *stack);
 void	rra(t_stack *stack);
 void	rrb(t_stack *stack);
 void	rrr(t_stack *stack);
+
+// CHECKER FUNCTIONS
+
+void	operation(t_stack *stack);
+int		checker_sort(t_stack *stack, char *stdin);
+int		checker_rotate(t_stack *stack, char *stdin);
+int		checker_sa(t_stack *stack);
+int		checker_sb(t_stack *stack);
+int		checker_ss(t_stack *stack);
+int		checker_pa(t_stack *stack);
+int		checker_pb(t_stack *stack);
+int		checker_ra(t_stack *stack);
+int		checker_rb(t_stack *stack);
+int		checker_rr(t_stack *stack);
+int		checker_rra(t_stack *stack);
+int		checker_rrb(t_stack *stack);
+int		checker_rrr(t_stack *stack);
 
 #endif
