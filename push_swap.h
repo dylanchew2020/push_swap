@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:49:36 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/16 00:19:54 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/16 13:04:21 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # include "libft/includes/libft.h"
 # include "libft/includes/get_next_line.h"
 # include "libft/includes/ft_printf.h"
-# include <stdio.h>
-
-# define M_SIZE 5
 
 typedef struct s_node
 {
