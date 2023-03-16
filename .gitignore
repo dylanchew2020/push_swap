@@ -1,6 +1,7 @@
 # Push_swap special
 checker_OS
 push_swap_tester
+push_swap_tester2
 
 # Prerequisites
 *.d

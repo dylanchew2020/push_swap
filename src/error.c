@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 17:31:27 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/16 12:41:06 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/16 15:16:45 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,21 @@ void	error_non_integer(char *arg, int code, t_stack *stack)
 	i = 0;
 	if (*arg == '\0')
 		exit_with_error(code, stack);
+	if (arg[i] == '-' && arg[i + 1] == '\0')
+		exit_with_error(code, stack);
 	while (arg[i] != '\0')
 	{
 		if ((arg[i] < '0' || arg[i] > '9') && arg[i] != '-')
 			exit_with_error(code, stack);
 		++i;
+		if (arg[i] == '-')
+			exit_with_error(code, stack);
 	}
 }
 
 void	exit_with_error(int code, t_stack *stack)
 {
-	ft_putstr_fd("Error!\n", 1);
+	ft_putstr_fd("Error\n", 2);
 	if (code >= 1)
 		free2d(stack->str_arg);
 	ps_lstclear(&stack->a);

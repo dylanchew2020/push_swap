@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:45:30 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/14 20:44:45 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/16 14:45:20 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	push_a(t_stack *stack, int push_size, int pivot)
 			++rotate;
 		}
 	}
-	while (rotate-- > 0)
+	while (stack->size_a > 5 && rotate-- > 0)
 		rra(stack);
 	return (push);
 }
@@ -99,7 +99,7 @@ int	push_b(t_stack *stack, int push_size, int pivot)
 			++rotate;
 		}
 	}
-	while (rotate-- > 0)
+	while (stack->size_a > 5 && rotate-- > 0)
 		rrb(stack);
 	return (push);
 }

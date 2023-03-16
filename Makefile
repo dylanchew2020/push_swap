@@ -69,7 +69,7 @@ ARG = "4 72 59 18 83 21 30 39 36 33 43 37 62 3 42 84 82 0 89 20 38 88 19 47 2 71
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ_DIR) $(OBJ)
-	@ $(CC) $(CFLAGS) $(OBJ) $(INC) $(LIB) -o $@ -fsanitize=address
+	@ $(CC) $(CFLAGS) $(OBJ) $(INC) $(LIB) -o $@ #-fsanitize=address
 	@ printf "$(_SUCCESS) Push_Swap Program Installation Completed\n\n"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
@@ -84,7 +84,7 @@ $(LIBFT):
 	@ $(MAKE) -C $(LIBFT_DIR)
 	
 $(BONUS): $(CHK_OBJ)
-	@ $(CC) $(CFLAGS) $(INC) $(LIB) $(CHK_OBJ) $(CHK_OBJ_ADD) -o $@ -fsanitize=address
+	@ $(CC) $(CFLAGS) $(INC) $(LIB) $(CHK_OBJ) $(CHK_OBJ_ADD) -o $@ #-fsanitize=address
 	@ printf "$(_SUCCESS) Checker Program Installation Completed\n\n"
 
 $(CHK_OBJ_DIR)%.o: $(CHK_DIR)%.c
