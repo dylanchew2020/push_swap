@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:49:38 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/16 00:32:22 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/16 12:57:11 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	main(int argc, char *argv[])
 	stack_init(&stack);
 	if (argc == 2)
 	{
+		if (argv[1][0] == '\0')
+			return (2);
 		stack.str_arg = ft_split(*(++argv), ' ');
 		insert_arg(&stack, 1, stack.str_arg);
 		free2d(stack.str_arg);
