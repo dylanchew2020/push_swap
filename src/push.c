@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:45:30 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/16 14:45:20 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/17 17:25:10 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,24 @@ void	pb(t_stack *stack)
 	ft_printf("pb\n");
 }
 
-int	push_a(t_stack *stack, int push_size, int pivot)
+/*
+** This function pushes all elements from the top of stack A that are LESS THAN
+** the specified pivot value to stack B. It returns the number of elements that
+** were successfully pushed.
+**
+** Parameters:
+** - stack: a pointer to the stack structure
+** - size: the number of nodes to consider, starting from the top of stack A
+** - pivot: the value to compare against for determining which elements to push
+*/
+int	push_a(t_stack *stack, int size, int pivot)
 {
 	int	push;
 	int	rotate;
 
 	push = 0;
 	rotate = 0;
-	while (push < push_size / 2)
+	while (push < size)
 	{
 		if (stack->a->data < pivot)
 		{
@@ -75,18 +85,24 @@ int	push_a(t_stack *stack, int push_size, int pivot)
 	return (push);
 }
 
-int	push_b(t_stack *stack, int push_size, int pivot)
+/*
+** This function pushes all elements from the top of stack B that are GREATER
+** THAN or EQUAL TO the specified pivot value to stack A. It returns the number
+** of elements that were successfully pushed.
+**
+** Parameters:
+** - stack: a pointer to the Stack structure
+** - size: the number of nodes to consider, starting from the top of stack B
+** - pivot: the value to compare against for determining which elements to push
+*/
+int	push_b(t_stack *stack, int size, int pivot)
 {
 	int	push;
 	int	rotate;
 
 	push = 0;
 	rotate = 0;
-	if (push_size % 2 == 0)
-		push_size = push_size / 2;
-	else if (push_size % 2 == 1)
-		push_size = (push_size / 2) + 1;
-	while (push < push_size)
+	while (push < size)
 	{
 		if (stack->b->data >= pivot)
 		{

@@ -102,6 +102,9 @@ run3:
 run4:
 	@ ./push_swap $(ARG) | ./checker_OS $(ARG)
 	
+run5:
+	@ ./push_swap $(ARG) | ./checker $(ARG)
+	
 clean:
 	@ $(RM) $(OBJ) $(CHK_OBJ)
 	@ $(RMDIR) $(OBJ_DIR)

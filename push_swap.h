@@ -6,7 +6,7 @@
 /*   By: lchew <lchew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:49:36 by lchew             #+#    #+#             */
-/*   Updated: 2023/03/16 13:04:21 by lchew            ###   ########.fr       */
+/*   Updated: 2023/03/17 17:10:01 by lchew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ typedef struct s_node
 /* 
 	t_node *a - stores the address of the first node (HEAD) in stack a.
 	t_node *b - stores the address of the first node (HEAD) in stack b.
-	int size - total number of nodes in stack a & b.
+	int size_a - total number of nodes in stack a.
+	int size_a - total number of nodes in stack b.
  */
 typedef struct s_stack
 {
@@ -36,7 +37,6 @@ typedef struct s_stack
 	int		size_a;
 	int		size_b;
 	char	**str_arg;
-	char	**multi_arg;
 }				t_stack;
 
 typedef struct s_index
@@ -62,13 +62,13 @@ void	index_stack(t_stack *stack, t_node *node, int size);
 
 // SORT FUNCTIONS
 
-void	sort_a(t_stack *stack, int push_size);
-void	sort_b(t_stack *stack, int push_size);
+void	sort_a(t_stack *stack, int size);
+void	sort_b(t_stack *stack, int size);
 void	sort_two(t_stack *stack, char input);
 void	sort_three_a(t_stack *stack);
 void	sort_three_b(t_stack *stack);
-int		push_a(t_stack *stack, int push_size, int pivot);
-int		push_b(t_stack *stack, int push_size, int pivot);
+int		push_a(t_stack *stack, int size, int pivot);
+int		push_b(t_stack *stack, int size, int pivot);
 int		check_sort_a(t_node *tmp, int size);
 int		check_sort_b(t_stack *stack, t_node *tmp, int size);
 
